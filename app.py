@@ -29,6 +29,8 @@ class Account:
 
 class Target():
     login_url = "https://login.target.com/gsp/static/v1/login/?client_id=ecom-ios-1.0.0"
+    login_url = "https://gologin.com/check-browser"
+    playwright_timeout = 60 * 1000
     token = os.getenv("GOLOGIN_KEY")
     counter = 1
     gl = GoLogin({
@@ -107,6 +109,7 @@ class Target():
                     # block images
                     page.route("**/*.{png,jpg,jpeg}", lambda route: route.abort())
                     page.goto(self.login_url)
+                    page.wait_for_timeout(self.playwright_timeout)
                     page.screenshot(path=f"{account.username}.png")
                     page.close()
                 self.gl.stop()
