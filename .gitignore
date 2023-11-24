@@ -2,3 +2,4 @@
 .venv/
 .sentry-native/
 *.png
+*.xlsx
